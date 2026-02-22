@@ -133,6 +133,8 @@ nav.scrolled {
   display: flex;
   gap: 32px;
   list-style: none;
+  flex: 1;
+  justify-content: center;
 }
 
 .nav-links a {
@@ -210,8 +212,11 @@ nav.scrolled {
 .hero-line-1, .hero-line-2, .hero-line-3, .hero-line-4 {
   display: block;
   opacity: 0;
-  transition: opacity 0.15s;
 }
+.hero-line-1 { animation: up 0.8s 0.3s ease-out forwards; }
+.hero-line-2 { animation: up 0.8s 0.6s ease-out forwards; }
+.hero-line-3 { animation: up 0.8s 0.9s ease-out forwards; }
+.hero-line-4 { animation: up 0.8s 1.2s ease-out forwards; }
 
 .hero-sub {
   margin-top: 36px;
@@ -1304,8 +1309,8 @@ footer {
   <div class="wrap">
     <div class="thesis-head r">
       <div class="section-label">Thesis</div>
-      <h2 data-lang-ja>非効率な産業こそが、<br>AIとブロックチェーンの最大の機会になる。</h2>
-      <h2 data-lang-en>Inefficient industries are AI and blockchain's greatest opportunity.</h2>
+      <h2 data-lang-ja>アナログな産業こそが、<br>AIとブロックチェーンの最大の機会になる。</h2>
+      <h2 data-lang-en>Analog industries are AI and blockchain's greatest opportunity.</h2>
     </div>
 
     <div class="thesis-list">
@@ -1474,7 +1479,7 @@ footer {
     </div>
 
     <div class="portfolio-grid">
-      <div class="pcard pcard-unicask r">
+      <a href="https://unicask.com/" target="_blank" rel="noopener" class="pcard pcard-unicask r">
         <div class="pcard-visual"><img src="images/unicask-hero.jpeg" alt="UniCask"></div>
         <div class="pcard-body">
           <div class="pcard-status">Operating</div>
@@ -1485,8 +1490,8 @@ footer {
           <p class="pcard-desc" data-lang-en>Tokenizing Scotch whisky casks as NFTs. Own, trade, and track maturation from your smartphone.</p>
           <div class="pcard-link">View &rarr;</div>
         </div>
-      </div>
-      <div class="pcard pcard-ango r r-d1">
+      </a>
+      <a href="https://ango.jp/" target="_blank" rel="noopener" class="pcard pcard-ango r r-d1">
         <div class="pcard-visual"><img src="images/ango-hero.png" alt="ANGO"></div>
         <div class="pcard-body">
           <div class="pcard-status">Operating</div>
@@ -1497,9 +1502,9 @@ footer {
           <p class="pcard-desc" data-lang-en>DAO-based co-ownership via NFT memberships. Operating across Ishigaki, Kawaguchiko, Yamanakako, and more.</p>
           <div class="pcard-link">View &rarr;</div>
         </div>
-      </div>
-      <div class="pcard pcard-ipconnect r r-d2">
-        <div class="pcard-visual"></div>
+      </a>
+      <a href="https://ipconnect.co.jp/" target="_blank" rel="noopener" class="pcard pcard-ipconnect r r-d2">
+        <div class="pcard-visual"><img src="images/ipconnect-hero.png" alt="IPconnect"></div>
         <div class="pcard-body">
           <div class="pcard-status">Building</div>
           <h3>IPconnect</h3>
@@ -1509,9 +1514,9 @@ footer {
           <p class="pcard-desc" data-lang-en>Rights analysis and blockchain recording for AI-generated works. Accepted into JLOX+, GENIAC-PRIZE winner.</p>
           <div class="pcard-link">View &rarr;</div>
         </div>
-      </div>
-      <div class="pcard pcard-fango r">
-        <div class="pcard-visual"></div>
+      </a>
+      <a href="https://fango.jp/" target="_blank" rel="noopener" class="pcard pcard-fango r">
+        <div class="pcard-visual"><img src="images/fango-hero.png" alt="FANGO"></div>
         <div class="pcard-body">
           <div class="pcard-status">Building</div>
           <h3>FANGO</h3>
@@ -1521,8 +1526,8 @@ footer {
           <p class="pcard-desc" data-lang-en>AI agents handle property tours through contract processing. The first model case for Embedded Roll-up.</p>
           <div class="pcard-link">View &rarr;</div>
         </div>
-      </div>
-      <div class="pcard pcard-japango r r-d1">
+      </a>
+      <a href="https://japango.io/" target="_blank" rel="noopener" class="pcard pcard-japango r r-d1">
         <div class="pcard-visual"><img src="images/japango-hero.png" alt="JAPANGO"></div>
         <div class="pcard-body">
           <div class="pcard-status">Operating</div>
@@ -1533,9 +1538,9 @@ footer {
           <p class="pcard-desc" data-lang-en>Inbound tourism operated by LLC-type DAO. A cross-border platform for Japanese cultural experiences.</p>
           <div class="pcard-link">View &rarr;</div>
         </div>
-      </div>
-      <div class="pcard pcard-decopon r r-d2">
-        <div class="pcard-visual"></div>
+      </a>
+      <a href="https://decopon.io/" target="_blank" rel="noopener" class="pcard pcard-decopon r r-d2">
+        <div class="pcard-visual"><img src="images/decopon-hero.png" alt="Decopon"></div>
         <div class="pcard-body">
           <div class="pcard-status">Building</div>
           <h3>Decopon</h3>
@@ -1545,7 +1550,7 @@ footer {
           <p class="pcard-desc" data-lang-en>Visualizing environmental value as NFTs and circulating them as points. Patent pending.</p>
           <div class="pcard-link">View &rarr;</div>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </section>
@@ -1557,8 +1562,8 @@ footer {
   <div class="wrap">
     <div class="leadership-head r">
       <div class="section-label">Leadership</div>
-      <h2 data-lang-ja><em>経営</em>チーム</h2>
-      <h2 data-lang-en><em>Leadership</em> Team</h2>
+      <h2 data-lang-ja>チーム</h2>
+      <h2 data-lang-en>Team</h2>
     </div>
 
     <div class="leaders">
@@ -1613,14 +1618,13 @@ footer {
       </a>
       <a href="news/2.html" class="news-item r r-d1">
         <span class="news-date">2025.07.29</span>
-        <span class="news-tag" data-lang-ja>観光</span>
-        <span class="news-tag" data-lang-en>Tourism</span>
+        <span class="news-tag">ANGO</span>
         <span class="news-title" data-lang-ja>長野県生坂村でリジェネラティブ・ツーリズム「創造の森」第2期始動</span>
         <span class="news-title" data-lang-en>Regenerative tourism "Forest of Creation" Phase 2 launches in Ikusaka Village</span>
       </a>
       <a href="news/3.html" class="news-item r r-d2">
         <span class="news-date">2025.07.10</span>
-        <span class="news-tag">AI</span>
+        <span class="news-tag">IPconnect</span>
         <span class="news-title" data-lang-ja>生成AI監修支援「IP Supervisory Supporter」がJLOX+に採択、本格開発開始</span>
         <span class="news-title" data-lang-en>"IP Supervisory Supporter" AI design review tool accepted into JLOX+</span>
       </a>
@@ -1679,10 +1683,6 @@ footer {
         <span class="company-label">主要取引先</span>
         <span class="company-value">電通、トヨタ自動車、千葉大学、京都大学 他</span>
       </div>
-      <div class="company-row r r-d4">
-        <span class="company-label">グループ会社</span>
-        <span class="company-value">株式会社UniCask、ANGO合同会社</span>
-      </div>
     </div>
     <div class="company-table" data-lang-en>
       <div class="company-row r">
@@ -1717,10 +1717,6 @@ footer {
         <span class="company-label">Key Clients</span>
         <span class="company-value">Dentsu, Toyota Motor, Chiba University, Kyoto University, and others</span>
       </div>
-      <div class="company-row r r-d4">
-        <span class="company-label">Group</span>
-        <span class="company-value">UniCask Inc., ANGO LLC</span>
-      </div>
     </div>
   </div>
 </section>
@@ -1733,8 +1729,7 @@ footer {
   <h2 class="r" data-lang-en><em>Contact Us</em></h2>
   <p class="r r-d1" data-lang-ja>事業提携・共同投資・取材など、お気軽にご連絡ください。</p>
   <p class="r r-d1" data-lang-en>Business partnerships, co-investment, press inquiries—get in touch.</p>
-  <a href="mailto:info@recika.jp" class="cta-btn r r-d2" data-lang-ja>メールで問い合わせる</a>
-  <a href="mailto:info@recika.jp" class="cta-btn r r-d2" data-lang-en>Send us an email</a>
+  <a href="contact.html" class="cta-btn r r-d2">Contact</a>
 </section>
 
 <!-- FOOTER -->
@@ -1782,46 +1777,7 @@ function setLang(lang) {
   document.querySelectorAll('.r').forEach(el => obs.observe(el));
 }
 
-/* ── Hero Text Scramble ── */
-(function() {
-  var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef0123456789アイウエオカキクケコサシスセソタチツテト@#$%&<>{}[]';
-  var SKIP = ' 　、。「」（）.,-—…';
-  function scramble(span, delay) {
-    var html = span.innerHTML;
-    var text = span.textContent;
-    var len = text.length;
-    if (!len) return;
-    var total = Math.max(900, len * 55);
-    var perChar = total / len;
-    var hold = 350;
-    setTimeout(function() {
-      span.style.opacity = '1';
-      var t0 = performance.now();
-      (function tick(now) {
-        var dt = now - t0;
-        var s = '', done = true;
-        for (var i = 0; i < len; i++) {
-          if (SKIP.indexOf(text[i]) >= 0) { s += text[i]; continue; }
-          if (dt >= i * perChar + hold) {
-            s += text[i];
-          } else {
-            s += CHARS[(Math.random() * CHARS.length) | 0];
-            done = false;
-          }
-        }
-        span.textContent = s;
-        if (done) { span.innerHTML = html; } else { requestAnimationFrame(tick); }
-      })(performance.now());
-    }, delay);
-  }
-  var h1 = document.querySelector('h1[data-lang-ja]');
-  if (h1) {
-    [1,2,3,4].forEach(function(n, i) {
-      var sp = h1.querySelector('.hero-line-' + n);
-      if (sp) scramble(sp, 300 + i * 400);
-    });
-  }
-})();
+/* ── Hero removed scramble, now using CSS stagger animation ── */
 
 /* ── Cursor Glow ── */
 (function() {
