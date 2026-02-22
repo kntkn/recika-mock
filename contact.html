@@ -166,6 +166,8 @@ function setLang(lang) {
     o.textContent = o.getAttribute('data-' + lang);
   });
 }
+var initLang = new URLSearchParams(window.location.search).get('lang');
+if (initLang === 'en') setLang('en');
 document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
   var name = document.getElementById('name').value.trim();

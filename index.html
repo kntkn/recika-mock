@@ -1208,7 +1208,7 @@ footer {
   <div class="nav-logo">RECIKA</div>
   <ul class="nav-links">
     <li><a href="#what">Vision</a></li>
-    <li><a href="#thesis">Thesis</a></li>
+    <li><a href="#thesis">Opportunity</a></li>
     <li><a href="#approach">Strategy</a></li>
     <li><a href="#architecture">Architecture</a></li>
     <li><a href="#portfolio">Portfolio</a></li>
@@ -1308,7 +1308,7 @@ footer {
 <section class="thesis" id="thesis">
   <div class="wrap">
     <div class="thesis-head r">
-      <div class="section-label">Thesis</div>
+      <div class="section-label">Opportunity</div>
       <h2 data-lang-ja>アナログな産業こそが、<br>AIとブロックチェーンの最大の機会になる。</h2>
       <h2 data-lang-en>Analog industries are AI and blockchain's greatest opportunity.</h2>
     </div>
@@ -1729,7 +1729,7 @@ footer {
   <h2 class="r" data-lang-en><em>Contact Us</em></h2>
   <p class="r r-d1" data-lang-ja>事業提携・共同投資・取材など、お気軽にご連絡ください。</p>
   <p class="r r-d1" data-lang-en>Business partnerships, co-investment, press inquiries—get in touch.</p>
-  <a href="contact.html" class="cta-btn r r-d2">Contact</a>
+  <a href="contact" class="cta-btn r r-d2">Contact</a>
 </section>
 
 <!-- FOOTER -->
@@ -1775,6 +1775,8 @@ function setLang(lang) {
   });
   document.querySelectorAll('.hero-line-1,.hero-line-2,.hero-line-3,.hero-line-4').forEach(s => { s.style.opacity = '1'; });
   document.querySelectorAll('.r').forEach(el => obs.observe(el));
+  var ctaLink = document.querySelector('.cta-btn[href^="contact"]');
+  if (ctaLink) ctaLink.href = lang === 'en' ? 'contact?lang=en' : 'contact';
 }
 
 /* ── Hero removed scramble, now using CSS stagger animation ── */
