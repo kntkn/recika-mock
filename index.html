@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RECIKA — Digital Influence, Real Change</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ========================================
+   RESET & TOKENS
+   ======================================== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #FAFAFA;
+  --bg-elevated: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-dark: #111827;
+  --accent: #B07832;
+  --accent-dim: rgba(176, 120, 50, 0.10);
+  --accent-faint: rgba(176, 120, 50, 0.05);
+  --teal: #1A7A6D;
+  --blue: #2E5C8A;
+  --text-1: #111827;
+  --text-2: #4B5563;
+  --text-3: #6B7280;
+  --text-4: #9CA3AF;
+  --border: rgba(0, 0, 0, 0.06);
+  --max-w: 1120px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', 'Noto Sans JP', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text-1);
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ========================================
+   SCROLL REVEAL
+   ======================================== */
+.r {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out,
+              transform 0.8s ease-out;
+}
+.r.v {
+  opacity: 1;
+  transform: translateY(0);
+}
+.r-d1 { transition-delay: 0.1s; }
+.r-d2 { transition-delay: 0.2s; }
+.r-d3 { transition-delay: 0.3s; }
+.r-d4 { transition-delay: 0.4s; }
+.r-d5 { transition-delay: 0.5s; }
+
+/* ========================================
+   LAYOUT
+   ======================================== */
+.wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+section {
+  position: relative;
+}
+
+.sep {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--border) 15%, rgba(176, 120, 50, 0.4) 50%, var(--border) 85%, transparent 100%);
+  background-size: 200% 100%;
+  animation: sepShimmer 8s ease-in-out infinite;
+}
+
+@keyframes sepShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ========================================
+   NAVIGATION
+   ======================================== */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  padding: 0 48px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 1px 0 var(--border);
+}
+
+.nav-logo {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-1);
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-3);
+}
+
+.nav-links a:hover {
+  color: var(--text-1);
+}
+
+.nav-cta {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--bg-elevated);
+  background: var(--text-1);
+  padding: 8px 20px;
+  border-radius: 4px;
+  transition: opacity 0.15s ease-out;
+}
+
+.nav-cta:hover {
+  opacity: 0.8;
+}
+
+/* ========================================
+   HERO
+   ======================================== */
+.hero {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background:
+    radial-gradient(ellipse at 25% 50%, rgba(176, 120, 50, 0.07) 0%, transparent 50%),
+    radial-gradient(ellipse at 75% 35%, rgba(26, 122, 109, 0.05) 0%, transparent 45%),
+    var(--bg-elevated);
+  overflow: hidden;
+}
+
+.hero-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 48px;
+  width: 100%;
+}
+
+.hero-label {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: up 0.8s 0.3s ease-out forwards;
+}
+
+.hero h1 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: clamp(26px, 3.4vw, 42px);
+  font-weight: 300;
+  line-height: 1.8;
+  max-width: 960px;
+  color: var(--text-1);
+  text-wrap: balance;
+}
+
+.hero h1 em {
+  font-style: normal;
+  font-weight: inherit;
+  color: var(--text-1);
+}
+
+.hero-line-1, .hero-line-2, .hero-line-3, .hero-line-4 {
+  display: block;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.hero-sub {
+  margin-top: 36px;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--text-2);
+  line-height: 2;
+  max-width: 600px;
+  text-wrap: pretty;
+  opacity: 0;
+  animation: up 0.8s 1.0s ease-out forwards;
+}
+
+.hero-canvas {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 55%;
+  height: 100%;
+  opacity: 0;
+  animation: heroCanvasIn 2.5s 0.3s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes heroCanvasIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Cursor glow */
+.cursor-glow {
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(176, 120, 50, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+  will-change: transform;
+  display: none;
+  top: 0;
+  left: 0;
+}
+
+/* Nav progress bar */
+.nav-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--teal));
+  width: 0%;
+  transition: none;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--text-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: up 0.8s 1.5s ease-out forwards;
+}
+
+.hero-scroll::before {
+  content: '';
+  width: 1px;
+  height: 32px;
+  background: var(--text-4);
+}
+
+@keyframes up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================================
+   SECTION LABEL — shared
+   ======================================== */
+.section-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: 48px;
+}
+
+.section-label::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--accent);
+  vertical-align: middle;
+  margin-right: 14px;
+}
+
+/* ========================================
+   SECTION — WHAT WE DO (was Vision)
+   ======================================== */
+.what {
+  padding: 160px 0;
+}
+
+.what-statement {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: clamp(20px, 2.6vw, 30px);
+  font-weight: 300;
+  line-height: 2.1;
+  max-width: 860px;
+  text-wrap: balance;
+}
+
+.what-statement strong {
+  font-weight: inherit;
+  color: var(--text-1);
+}
+
+.what-body {
+  margin-top: 48px;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--text-2);
+  line-height: 2.2;
+  max-width: 600px;
+  text-wrap: pretty;
+}
+
+.what-values {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 64px;
+}
+
+.what-value {
+  padding: 28px 24px;
+  border-top: 2px solid var(--accent);
+}
+
+.what-value-icon {
+  width: 36px;
+  height: 36px;
+  color: var(--accent);
+  margin-bottom: 16px;
+  opacity: 0.7;
+}
+
+.what-value h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--text-1);
+}
+
+.what-value p {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--text-2);
+  text-wrap: pretty;
+}
+
+/* ========================================
+   SECTION — THESIS
+   ======================================== */
+.thesis {
+  padding: 160px 0;
+  background: var(--bg-elevated);
+}
+
+.thesis-head {
+  margin-bottom: 64px;
+}
+
+.thesis-head h2 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 300;
+  line-height: 1.7;
+  text-wrap: balance;
+}
+
+.thesis-head h2 em {
+  font-style: normal;
+  font-weight: inherit;
+  color: var(--text-1);
+}
+
+.thesis-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.thesis-row {
+  display: grid;
+  grid-template-columns: 40px 200px 1fr;
+  gap: 24px;
+  padding: 32px 0;
+  border-top: 1px solid var(--border);
+  align-items: start;
+}
+
+.thesis-row:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.thesis-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--accent);
+  opacity: 0.7;
+  margin-top: 3px;
+}
+
+.thesis-row h3 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-1);
+}
+
+.thesis-row p {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--text-2);
+  text-wrap: pretty;
+}
+
+.thesis-takeaway {
+  margin-top: 56px;
+  padding: 32px 36px;
+  border-left: 2px solid var(--accent);
+  background: var(--accent-faint);
+}
+
+.thesis-takeaway p {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 2;
+  text-wrap: pretty;
+}
+
+.thesis-takeaway em {
+  font-style: normal;
+  color: var(--accent);
+  font-weight: inherit;
+}
+
+/* ========================================
+   SECTION — APPROACH
+   ======================================== */
+.approach {
+  padding: 160px 0;
+}
+
+.approach-head {
+  margin-bottom: 80px;
+}
+
+.approach-head h2 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 300;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  text-wrap: balance;
+}
+
+.approach-head h2 em {
+  font-style: normal;
+  font-weight: inherit;
+  color: var(--text-1);
+}
+
+.approach-head p {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--text-2);
+  line-height: 2;
+  max-width: 560px;
+  text-wrap: pretty;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+}
+
+.steps::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: calc(12.5%);
+  right: calc(12.5%);
+  height: 1px;
+  background: var(--border);
+}
+
+.step {
+  text-align: center;
+  padding: 0 20px;
+}
+
+.step-dot {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  margin: 0 auto 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  background: var(--bg);
+  position: relative;
+  z-index: 1;
+}
+
+.step-dot svg {
+  width: 20px;
+  height: 20px;
+}
+
+.step-en {
+  font-size: 10px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--text-4);
+  margin-bottom: 6px;
+}
+
+.step h3 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.step p {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--text-2);
+  text-wrap: pretty;
+}
+
+/* ========================================
+   SECTION — ARCHITECTURE
+   ======================================== */
+.architecture {
+  padding: 160px 0;
+  background: var(--bg-elevated);
+}
+
+.arch-head {
+  margin-bottom: 72px;
+}
+
+.arch-head h2 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 300;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  text-wrap: balance;
+}
+
+.arch-head h2 em {
+  font-style: normal;
+  font-weight: inherit;
+  color: var(--text-1);
+}
+
+.arch-head p {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--text-2);
+  line-height: 2;
+  max-width: 520px;
+  text-wrap: pretty;
+}
+
+.arch-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.arch-layer {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 40px;
+  padding: 36px 40px;
+  border-radius: 4px;
+  transition: transform 0.15s ease-out;
+  position: relative;
+}
+
+.arch-layer:hover {
+  transform: translateX(4px);
+}
+
+
+.layer-3 {
+  background: rgba(26, 122, 109, 0.04);
+  border-left: 2px solid var(--teal);
+}
+.layer-2 {
+  background: var(--accent-faint);
+  border-left: 2px solid var(--accent);
+}
+.layer-1 {
+  background: rgba(46, 92, 138, 0.04);
+  border-left: 2px solid var(--blue);
+}
+
+.arch-layer-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.layer-3 .arch-layer-label { color: var(--teal); }
+.layer-2 .arch-layer-label { color: var(--accent); }
+.layer-1 .arch-layer-label { color: var(--blue); }
+
+.arch-layer-title {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.arch-layer-body {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 2;
+  color: var(--text-2);
+  margin-bottom: 16px;
+  text-wrap: pretty;
+}
+
+.arch-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.arch-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 3px 10px;
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid var(--border);
+  color: var(--text-3);
+}
+
+/* ========================================
+   SECTION — PORTFOLIO
+   ======================================== */
+.portfolio {
+  padding: 160px 0;
+}
+
+.portfolio-head {
+  margin-bottom: 72px;
+}
+
+.portfolio-head h2 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 300;
+  line-height: 1.7;
+  margin-bottom: 16px;
+  text-wrap: balance;
+}
+
+.portfolio-head h2 em {
+  font-style: normal;
+  font-weight: inherit;
+  color: var(--text-1);
+}
+
+.portfolio-head > p {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--text-2);
+  text-wrap: pretty;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  perspective: 1200px;
+}
+
+.pcard {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.pcard:hover {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
+}
+
+.pcard-visual {
+  height: 160px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pcard-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pcard-unicask .pcard-visual { background: #F5EDE0; }
+.pcard-ango .pcard-visual { background: #E4F0E8; }
+.pcard-ipconnect .pcard-visual { background: #E8E4F0; }
+.pcard-fango .pcard-visual { background: #E0EBF5; }
+.pcard-japango .pcard-visual { background: #F0E4EA; }
+.pcard-decopon .pcard-visual { background: #E4F0E4; }
+
+.pcard-body {
+  padding: 24px 28px 28px;
+}
+
+.pcard-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--text-4);
+  margin-bottom: 10px;
+}
+
+.pcard h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.pcard-phil {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--accent);
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.pcard-desc {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--text-2);
+  text-wrap: pretty;
+}
+
+.pcard-link {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--text-3);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pcard:hover .pcard-link {
+  color: var(--text-1);
+}
+
+/* ========================================
+   SECTION — LEADERSHIP
+   ======================================== */
+.leadership {
+  padding: 160px 0;
+  background: var(--bg-elevated);
+}
+
+.leadership-head {
+  margin-bottom: 72px;
+}
+
+.leadership-head h2 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 300;
+  line-height: 1.7;
+  text-wrap: balance;
+}
+
+.leadership-head h2 em {
+  font-style: normal;
+  font-weight: inherit;
+  color: var(--text-1);
+}
+
+.leaders {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+.leader {
+  display: flex;
+  gap: 28px;
+}
+
+.leader-avatar {
+  flex-shrink: 0;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--bg);
+  border: 1px solid var(--border);
+}
+
+.leader-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.leader-name {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.leader-role {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 16px;
+}
+
+.leader-bio {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 2;
+  color: var(--text-2);
+  text-wrap: pretty;
+}
+
+/* ========================================
+   SECTION — NEWS
+   ======================================== */
+.news {
+  padding: 120px 0;
+}
+
+.news-head {
+  margin-bottom: 56px;
+}
+
+.news-head h2 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 300;
+  line-height: 1.7;
+  text-wrap: balance;
+}
+
+.news-head h2 em {
+  font-style: normal;
+  font-weight: inherit;
+  color: var(--text-1);
+}
+
+.news-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.news-item {
+  display: grid;
+  grid-template-columns: 120px 100px 1fr;
+  gap: 24px;
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  align-items: baseline;
+}
+
+.news-item:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.news-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.news-tag {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.news-title {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-1);
+  line-height: 1.8;
+}
+
+.news-more {
+  display: inline-block;
+  margin-top: 40px;
+  font-size: 13px;
+  color: var(--text-3);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2px;
+}
+
+.news-more:hover {
+  color: var(--text-1);
+  border-color: var(--text-1);
+}
+
+/* ========================================
+   LANGUAGE TOGGLE
+   ======================================== */
+.lang-toggle {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-4);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 20px;
+}
+
+.lang-toggle button {
+  background: none;
+  border: none;
+  font: inherit;
+  font-size: 11px;
+  color: var(--text-4);
+  cursor: pointer;
+  padding: 0;
+}
+
+.lang-toggle button.active {
+  color: var(--text-1);
+  font-weight: 500;
+}
+
+/* i18n visibility */
+[data-lang-en] { display: none; }
+html[lang="en"] [data-lang-en] { display: revert; }
+html[lang="en"] [data-lang-ja] { display: none; }
+
+/* ========================================
+   SECTION — COMPANY
+   ======================================== */
+.company {
+  padding: 120px 0;
+  background: var(--bg-elevated);
+}
+
+.company-head {
+  margin-bottom: 56px;
+}
+
+.company-head h2 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 300;
+  line-height: 1.7;
+  text-wrap: balance;
+}
+
+.company-head h2 em {
+  font-style: normal;
+  font-weight: inherit;
+  color: var(--text-1);
+}
+
+.company-table {
+  max-width: 720px;
+}
+
+.company-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 32px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+  align-items: baseline;
+}
+
+.company-row:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.company-label {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-1);
+}
+
+.company-value {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-2);
+  line-height: 1.9;
+}
+
+/* ========================================
+   SECTION — CTA
+   ======================================== */
+.cta {
+  padding: 120px 0;
+  text-align: center;
+  background: var(--bg-elevated);
+}
+
+.cta h2 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 300;
+  line-height: 1.8;
+  margin-bottom: 16px;
+  text-wrap: balance;
+}
+
+.cta h2 em {
+  font-style: normal;
+  font-weight: inherit;
+  color: var(--text-1);
+}
+
+.cta p {
+  font-size: 14px;
+  color: var(--text-3);
+  font-weight: 300;
+  margin-bottom: 40px;
+  text-wrap: pretty;
+}
+
+.cta-btn {
+  display: inline-block;
+  padding: 14px 48px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--bg-elevated);
+  background: var(--text-1);
+  border: none;
+  border-radius: 4px;
+  transition: opacity 0.15s ease-out;
+  cursor: pointer;
+}
+
+.cta-btn:hover {
+  opacity: 0.85;
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+footer {
+  padding: 40px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  border-top: 1px solid var(--border);
+}
+
+.footer-logo {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-3);
+}
+
+.footer-info {
+  font-size: 11px;
+  color: var(--text-3);
+  text-align: right;
+  line-height: 1.8;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (min-width: 769px) {
+  .cursor-glow { display: block; }
+}
+
+@media (max-width: 1024px) {
+  .hero-canvas { width: 45%; }
+  .steps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+  .steps::before { display: none; }
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .arch-layer {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .r {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .hero-label,
+  .hero-line-1,
+  .hero-line-2,
+  .hero-line-3,
+  .hero-line-4,
+  .hero-sub,
+  .hero-scroll,
+  .hero-canvas {
+    opacity: 1;
+    animation: none;
+  }
+  .sep { animation: none; }
+}
+
+@media (max-width: 768px) {
+  .wrap { padding: 0 24px; }
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .hero-inner { padding: 0 24px; }
+  .hero-canvas { display: none; }
+  .thesis-row {
+    grid-template-columns: 40px 1fr;
+    gap: 16px;
+  }
+  .thesis-row p {
+    grid-column: 1 / -1;
+    padding-left: 64px;
+  }
+  .what-values { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; }
+  .portfolio-grid { grid-template-columns: 1fr; }
+  .leaders { grid-template-columns: 1fr; }
+  .leader { flex-direction: column; align-items: center; text-align: center; }
+  .news-item {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .company-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  footer { flex-direction: column; gap: 16px; text-align: center; }
+  .footer-info { text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-progress" id="navProgress"></div>
+  <div class="nav-logo">RECIKA</div>
+  <ul class="nav-links">
+    <li><a href="#what">Vision</a></li>
+    <li><a href="#thesis">Thesis</a></li>
+    <li><a href="#approach">Strategy</a></li>
+    <li><a href="#architecture">Architecture</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#company">Company</a></li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="active" onclick="setLang('ja')">JA</button>
+    <span>/</span>
+    <button onclick="setLang('en')">EN</button>
+  </div>
+  <a href="#contact" class="nav-cta" data-lang-ja>Contact</a>
+  <a href="#contact" class="nav-cta" data-lang-en>Contact</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <h1 data-lang-ja>
+      <span class="hero-line-1">個人の価値を最大化できる</span>
+      <span class="hero-line-2"><em>あたらしい価値</em>を、</span>
+      <span class="hero-line-3">新しい技術とビジネスモデルで創り出し、</span>
+      <span class="hero-line-4"><em>民主主義社会</em>に貢献する。</span>
+    </h1>
+    <h1 data-lang-en>
+      <span class="hero-line-1">Creating <em>new value</em></span>
+      <span class="hero-line-2">that maximizes individual potential,</span>
+      <span class="hero-line-3">through new technology and business models,</span>
+      <span class="hero-line-4">contributing to a <em>democratic society</em>.</span>
+    </h1>
+  </div>
+  <div class="hero-canvas" aria-hidden="true">
+    <canvas id="heroCanvas"></canvas>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- WHAT WE DO -->
+<section class="what" id="what">
+  <div class="wrap">
+    <div class="section-label r">Vision</div>
+    <div class="what-statement r r-d1" data-lang-ja>
+      レシカは実物資産とデジタルの融合による<br>
+      新たな<strong>価値取引</strong>を創造する<strong>New Technology Enabler</strong>です。<br>
+      AIとブロックチェーンを実業に埋め込むロールアップ戦略で、<br>
+      非DX産業の<strong>垂直統合</strong>を推進します。
+    </div>
+    <div class="what-statement r r-d1" data-lang-en>
+      RECIKA is a <strong>New Technology Enabler</strong> creating<br>
+      new <strong>value transactions</strong> through the fusion of real-world assets and digital.<br>
+      We drive <strong>vertical integration</strong> of non-DX industries<br>
+      with a roll-up strategy that embeds AI and blockchain into real business.
+    </div>
+    <div class="what-values r r-d2">
+      <div class="what-value">
+        <svg class="what-value-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="18" r="13"/>
+          <ellipse cx="18" cy="18" rx="6" ry="13"/>
+          <path d="M5 18h26"/>
+          <path d="M7 10.5h22M7 25.5h22"/>
+        </svg>
+        <h3>From Japan to the World</h3>
+        <p data-lang-ja>日本のユニークで価値あるコミュニティを海外と繋ぎ、クロスボーダービジネスを実現。</p>
+        <p data-lang-en>Connecting Japan's unique, high-value communities with the world to build cross-border business.</p>
+      </div>
+      <div class="what-value">
+        <svg class="what-value-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="10" y="10" width="16" height="16" rx="2"/>
+          <circle cx="18" cy="18" r="4"/>
+          <path d="M14 5v5M22 5v5M14 26v5M22 26v5M5 14h5M5 22h5M26 14h5M26 22h5"/>
+        </svg>
+        <h3>AI & BC Enablement</h3>
+        <p data-lang-ja>AIとブロックチェーンの社会実装に必要なテクノロジーとオペレーションをワンストップ提供。</p>
+        <p data-lang-en>One-stop technology and operations for the real-world deployment of AI and blockchain.</p>
+      </div>
+      <div class="what-value">
+        <svg class="what-value-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 7l12 7-12 7L6 14z"/>
+          <path d="M6 19l12 7 12-7"/>
+          <path d="M6 24l12 7 12-7"/>
+        </svg>
+        <h3>Partnership & Roll-up</h3>
+        <p data-lang-ja>JV共同投資から連続買収まで、パートナーと共に垂直統合型の価値創出を推進。</p>
+        <p data-lang-en>From JV co-investment to serial acquisitions, driving vertically integrated value creation with partners.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- THESIS -->
+<section class="thesis" id="thesis">
+  <div class="wrap">
+    <div class="thesis-head r">
+      <div class="section-label">Thesis</div>
+      <h2 data-lang-ja>非効率な産業こそが、<br>AIとブロックチェーンの最大の機会になる。</h2>
+      <h2 data-lang-en>Inefficient industries are AI and blockchain's greatest opportunity.</h2>
+    </div>
+
+    <div class="thesis-list">
+      <div class="thesis-row r">
+        <svg class="thesis-icon" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="15" y="4" width="9" height="20" rx="2"/><path d="M4 14h11m0 0l-4-4m4 4l-4 4"/></svg>
+        <h3 data-lang-ja>入口の再編</h3>
+        <h3 data-lang-en>Restructuring the entry point</h3>
+        <p data-lang-ja>AIエージェントが顧客対応の第一線に立ち始めている。FANGOでは不動産の物件案内から契約手続きまでをAIが担う。</p>
+        <p data-lang-en>AI agents are stepping into frontline customer interactions. At FANGO, AI handles everything from property tours to contract processing.</p>
+      </div>
+      <div class="thesis-row r r-d1">
+        <svg class="thesis-icon" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="14" width="5" height="10" rx="1"/><rect x="12" y="9" width="5" height="15" rx="1"/><rect x="19" y="4" width="5" height="20" rx="1"/></svg>
+        <h3 data-lang-ja>一次データの価値化</h3>
+        <h3 data-lang-en>Monetizing first-party data</h3>
+        <p data-lang-ja>ウイスキー樽の熟成データ、別荘の利用データ、仲介の成約データ——現場の一次データを持つ者が競争優位を得る時代になった。</p>
+        <p data-lang-en>Cask maturation data, villa usage data, brokerage transaction data—those who own first-party operational data now hold the competitive edge.</p>
+      </div>
+      <div class="thesis-row r r-d2">
+        <svg class="thesis-icon" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h16m0 0l-4-4m4 4l-4 4"/><path d="M24 18H8m0 0l4-4m-4 4l4 4"/></svg>
+        <h3 data-lang-ja>資産の流動化</h3>
+        <h3 data-lang-en>Asset liquidity</h3>
+        <p data-lang-ja>ブロックチェーンで所有権を分割し、これまで動かせなかった実物資産に流動性を与える。UniCaskのウイスキー樽NFTはその実例。</p>
+        <p data-lang-en>Blockchain fractionates ownership to bring liquidity to previously illiquid real-world assets. UniCask's whisky cask NFTs are a live example.</p>
+      </div>
+      <div class="thesis-row r r-d3">
+        <svg class="thesis-icon" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="14" r="4"/><path d="M14 3v4m0 14v4M3 14h4m14 0h4M6.5 6.5l2.8 2.8m9.4 9.4l2.8 2.8M6.5 21.5l2.8-2.8m9.4-9.4l2.8-2.8"/></svg>
+        <h3 data-lang-ja>非DX産業の自動化余地</h3>
+        <h3 data-lang-en>Automation potential in non-DX industries</h3>
+        <p data-lang-ja>不動産、酒類、観光——デジタル化が進んでいない産業ほど、AIによる自動化で利益構造を一変させる余地が大きい。</p>
+        <p data-lang-en>Real estate, spirits, tourism—the less digitized the industry, the greater the room for AI-driven automation to transform its economics.</p>
+      </div>
+      <div class="thesis-row r r-d4">
+        <svg class="thesis-icon" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3L4 8v7c0 5.5 4.3 10 10 11 5.7-1 10-5.5 10-11V8L14 3z"/><path d="M10 14l3 3 5-5"/></svg>
+        <h3 data-lang-ja>AIの信頼基盤</h3>
+        <h3 data-lang-en>Trust infrastructure for AI</h3>
+        <p data-lang-ja>AIの行動ログをブロックチェーンに記録することで、説明責任と透明性を担保する。AI×ブロックチェーンの統合が不可欠になる。</p>
+        <p data-lang-en>Recording AI action logs on blockchain ensures accountability and transparency. The convergence of AI and blockchain becomes essential.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- APPROACH -->
+<section class="approach" id="approach">
+  <div class="wrap">
+    <div class="approach-head r">
+      <div class="section-label">Strategy</div>
+      <h2><em>Embedded Roll-up</em></h2>
+    </div>
+
+    <div class="steps">
+      <div class="step r">
+        <div class="step-dot"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="10" r="5"/><circle cx="12.5" cy="10" r="5"/></svg></div>
+        <div class="step-en">JV / Co-invest</div>
+        <h3 data-lang-ja>共同投資</h3>
+        <h3 data-lang-en>Co-invest</h3>
+        <p data-lang-ja>パートナー企業と資本を共有して事業に参入し、現場の業務と課題を深く理解する。</p>
+        <p data-lang-en>Enter industries by sharing capital with partners. Gain deep understanding of frontline operations and challenges.</p>
+      </div>
+      <div class="step r r-d1">
+        <div class="step-dot"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3l7 4-7 4-7-4z"/><path d="M3 10l7 4 7-4"/><path d="M3 14l7 4 7-4"/></svg></div>
+        <div class="step-en">Build AI/BC OS</div>
+        <h3 data-lang-ja>技術基盤の構築</h3>
+        <h3 data-lang-en>Build the foundation</h3>
+        <p data-lang-ja>ブロックチェーンとAIの共通基盤を実装し、一次データの取得体制を確立する。</p>
+        <p data-lang-en>Implement shared blockchain and AI infrastructure. Establish systems for first-party data acquisition.</p>
+      </div>
+      <div class="step r r-d2">
+        <div class="step-dot"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10a5 5 0 1 1-5-5"/><path d="M10 5l3 0 0 3"/></svg></div>
+        <div class="step-en">Operate</div>
+        <h3 data-lang-ja>運用・実証</h3>
+        <h3 data-lang-en>Operate & prove</h3>
+        <p data-lang-ja>データに基づく改善サイクルで、コスト削減と収益性向上を具体的な数字で実証する。</p>
+        <p data-lang-en>Drive data-driven improvement cycles. Demonstrate cost reduction and profitability gains with concrete numbers.</p>
+      </div>
+      <div class="step r r-d3">
+        <div class="step-dot"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3v14M3 10h14"/><path d="M10 3l-2 2m2-2l2 2"/><path d="M10 17l-2-2m2 2l2-2"/><path d="M3 10l2-2m-2 2l2 2"/><path d="M17 10l-2-2m2 2l-2 2"/></svg></div>
+        <div class="step-en">Acquire &amp; Scale</div>
+        <h3 data-lang-ja>拡張</h3>
+        <h3 data-lang-en>Scale</h3>
+        <p data-lang-ja>同一領域の企業を連続的に取得し、AI基盤を横展開してスケールさせる。</p>
+        <p data-lang-en>Acquire adjacent companies in the same vertical. Deploy the AI foundation horizontally to scale.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ARCHITECTURE -->
+<section class="architecture" id="architecture">
+  <div class="wrap">
+    <div class="arch-head r">
+      <div class="section-label">Architecture</div>
+      <h2 data-lang-ja><em>Roll-up OS</em>｜3層アーキテクチャ</h2>
+      <h2 data-lang-en><em>Roll-up OS</em> | Three-Layer Architecture</h2>
+    </div>
+
+    <div class="arch-stack">
+      <div class="arch-layer layer-3 r">
+        <div>
+          <div class="arch-layer-label">Layer 3 — Intelligence</div>
+          <div class="arch-layer-title" data-lang-ja>AIエージェント &amp; LLM</div>
+          <div class="arch-layer-title" data-lang-en>AI Agents &amp; LLM</div>
+        </div>
+        <div>
+          <p class="arch-layer-body" data-lang-ja>自律型AIエージェントによる業務自動化と意思決定支援。不動産仲介、在庫管理、顧客対応など、産業特化型SKILLSパッケージとして複数の産業に横展開する。</p>
+          <p class="arch-layer-body" data-lang-en>Autonomous AI agents for operational automation and decision support. Delivered as industry-specific SKILLS packages deployable across multiple verticals.</p>
+          <div class="arch-tags">
+            <span class="arch-tag">LLM</span>
+            <span class="arch-tag">Autonomous Agent</span>
+            <span class="arch-tag">SKILLS Package</span>
+          </div>
+        </div>
+      </div>
+      <div class="arch-layer layer-2 r r-d1">
+        <div>
+          <div class="arch-layer-label">Layer 2 — Data</div>
+          <div class="arch-layer-title" data-lang-ja>データ統合基盤</div>
+          <div class="arch-layer-title" data-lang-en>Unified Data Platform</div>
+        </div>
+        <div>
+          <p class="arch-layer-body" data-lang-ja>各産業のERP・SaaS・IoTから一次データを収集・統合する中間層。秘密計算によるプライバシー保護、メタデータ管理、RAGパイプラインを備え、AIレイヤーに構造化されたデータを供給する。</p>
+          <p class="arch-layer-body" data-lang-en>The middleware layer that collects and unifies first-party data from ERP, SaaS, and IoT across industries. Equipped with secure computation, metadata management, and RAG pipelines to feed structured data to the AI layer above.</p>
+          <div class="arch-tags">
+            <span class="arch-tag">Data Connector</span>
+            <span class="arch-tag">MPC</span>
+            <span class="arch-tag">Metadata</span>
+            <span class="arch-tag">RAG</span>
+          </div>
+        </div>
+      </div>
+      <div class="arch-layer layer-1 r r-d2">
+        <div>
+          <div class="arch-layer-label">Layer 1 — Trust</div>
+          <div class="arch-layer-title" data-lang-ja>ブロックチェーン信頼レイヤー</div>
+          <div class="arch-layer-title" data-lang-en>Blockchain Trust Layer</div>
+        </div>
+        <div>
+          <p class="arch-layer-body" data-lang-ja>AIの行動ログをブロックチェーンに記録し、透明性と説明責任を担保する信頼基盤。資産のトークン化・所有権移転の改ざん耐性と監査証跡を提供し、UniCaskやANGOのNFTもこのレイヤーで動く。</p>
+          <p class="arch-layer-body" data-lang-en>Records AI action logs on blockchain to ensure transparency and accountability. Provides tamper-resistant audit trails for asset tokenization and ownership transfer. UniCask and ANGO NFTs run on this layer.</p>
+          <div class="arch-tags">
+            <span class="arch-tag">Tamper-proof Log</span>
+            <span class="arch-tag">Audit Trail</span>
+            <span class="arch-tag">Provenance</span>
+            <span class="arch-tag">Tokenization</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+  <div class="wrap">
+    <div class="portfolio-head r">
+      <div class="section-label">Portfolio</div>
+      <h2 data-lang-ja>プロジェクト・<em>ケイパビリティ</em></h2>
+      <h2 data-lang-en>Project <em>Capabilities</em></h2>
+    </div>
+
+    <div class="portfolio-grid">
+      <div class="pcard pcard-unicask r">
+        <div class="pcard-visual"><img src="images/unicask-hero.jpeg" alt="UniCask"></div>
+        <div class="pcard-body">
+          <div class="pcard-status">Operating</div>
+          <h3>UniCask</h3>
+          <p class="pcard-phil" data-lang-ja>ウイスキー樽のトークン化</p>
+          <p class="pcard-phil" data-lang-en>Whisky cask tokenization</p>
+          <p class="pcard-desc" data-lang-ja>スコッチウイスキーの樽をNFTとしてトークン化。スマートフォンで所有・売買・熟成状況の確認ができる。</p>
+          <p class="pcard-desc" data-lang-en>Tokenizing Scotch whisky casks as NFTs. Own, trade, and track maturation from your smartphone.</p>
+          <div class="pcard-link">View &rarr;</div>
+        </div>
+      </div>
+      <div class="pcard pcard-ango r r-d1">
+        <div class="pcard-visual"><img src="images/ango-hero.png" alt="ANGO"></div>
+        <div class="pcard-body">
+          <div class="pcard-status">Operating</div>
+          <h3>ANGO</h3>
+          <p class="pcard-phil" data-lang-ja>別荘・古民家のDAO共同保有</p>
+          <p class="pcard-phil" data-lang-en>DAO co-ownership of villas</p>
+          <p class="pcard-desc" data-lang-ja>NFT会員権によるDAO型の共同保有。石垣島、河口湖、山中湖など複数拠点で運営中。</p>
+          <p class="pcard-desc" data-lang-en>DAO-based co-ownership via NFT memberships. Operating across Ishigaki, Kawaguchiko, Yamanakako, and more.</p>
+          <div class="pcard-link">View &rarr;</div>
+        </div>
+      </div>
+      <div class="pcard pcard-ipconnect r r-d2">
+        <div class="pcard-visual"></div>
+        <div class="pcard-body">
+          <div class="pcard-status">Building</div>
+          <h3>IPconnect</h3>
+          <p class="pcard-phil" data-lang-ja>AI生成コンテンツの権利管理</p>
+          <p class="pcard-phil" data-lang-en>Rights management for AI-generated content</p>
+          <p class="pcard-desc" data-lang-ja>AI生成物の権利分析とブロックチェーンへの記録。JLOX+採択、GENIAC-PRIZE受賞。</p>
+          <p class="pcard-desc" data-lang-en>Rights analysis and blockchain recording for AI-generated works. Accepted into JLOX+, GENIAC-PRIZE winner.</p>
+          <div class="pcard-link">View &rarr;</div>
+        </div>
+      </div>
+      <div class="pcard pcard-fango r">
+        <div class="pcard-visual"></div>
+        <div class="pcard-body">
+          <div class="pcard-status">Building</div>
+          <h3>FANGO</h3>
+          <p class="pcard-phil" data-lang-ja>不動産仲介のAIエージェント</p>
+          <p class="pcard-phil" data-lang-en>AI agent for real estate brokerage</p>
+          <p class="pcard-desc" data-lang-ja>物件案内から契約手続きまでをAIエージェントが代行。Embedded Roll-upの最初のモデルケース。</p>
+          <p class="pcard-desc" data-lang-en>AI agents handle property tours through contract processing. The first model case for Embedded Roll-up.</p>
+          <div class="pcard-link">View &rarr;</div>
+        </div>
+      </div>
+      <div class="pcard pcard-japango r r-d1">
+        <div class="pcard-visual"><img src="images/japango-hero.png" alt="JAPANGO"></div>
+        <div class="pcard-body">
+          <div class="pcard-status">Operating</div>
+          <h3>JAPANGO</h3>
+          <p class="pcard-phil" data-lang-ja>DAO型インバウンド観光</p>
+          <p class="pcard-phil" data-lang-en>DAO-based inbound tourism</p>
+          <p class="pcard-desc" data-lang-ja>合同会社型DAOによるインバウンド観光運営。日本文化体験のクロスボーダープラットフォーム。</p>
+          <p class="pcard-desc" data-lang-en>Inbound tourism operated by LLC-type DAO. A cross-border platform for Japanese cultural experiences.</p>
+          <div class="pcard-link">View &rarr;</div>
+        </div>
+      </div>
+      <div class="pcard pcard-decopon r r-d2">
+        <div class="pcard-visual"></div>
+        <div class="pcard-body">
+          <div class="pcard-status">Building</div>
+          <h3>Decopon</h3>
+          <p class="pcard-phil" data-lang-ja>カーボンクレジットのNFT化</p>
+          <p class="pcard-phil" data-lang-en>Carbon credit NFTs</p>
+          <p class="pcard-desc" data-lang-ja>環境価値をNFTとして可視化し、ポイントとして流通させる仕組み。特許出願中。</p>
+          <p class="pcard-desc" data-lang-en>Visualizing environmental value as NFTs and circulating them as points. Patent pending.</p>
+          <div class="pcard-link">View &rarr;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- LEADERSHIP -->
+<section class="leadership" id="leadership">
+  <div class="wrap">
+    <div class="leadership-head r">
+      <div class="section-label">Leadership</div>
+      <h2 data-lang-ja><em>経営</em>チーム</h2>
+      <h2 data-lang-en><em>Leadership</em> Team</h2>
+    </div>
+
+    <div class="leaders">
+      <div class="leader r">
+        <div class="leader-avatar"><img src="images/taniya.png" alt="谷家 衛"></div>
+        <div>
+          <div class="leader-name" data-lang-ja>谷家 衛</div>
+          <div class="leader-name" data-lang-en>Mamoru Taniya</div>
+          <div class="leader-role" data-lang-ja>会長</div>
+          <div class="leader-role" data-lang-en>Chairman</div>
+          <p class="leader-bio" data-lang-ja>
+            東京大学法学部卒。ソロモン・ブラザーズにてアジア最年少マネージング・ディレクター。チューダー・インベストメントを経て、あすかアセットマネジメントを創業。ライフネット生命やMoney Designの立ち上げを支援。
+          </p>
+          <p class="leader-bio" data-lang-en>
+            University of Tokyo, Faculty of Law. Youngest Managing Director in Asia at Salomon Brothers. Founded Asuka Asset Management after Tudor Investment. Supported the launch of Lifenet Insurance and Money Design.
+          </p>
+        </div>
+      </div>
+      <div class="leader r r-d1">
+        <div class="leader-avatar"><img src="images/chris-dai.png" alt="戴 有造"></div>
+        <div>
+          <div class="leader-name" data-lang-ja>クリス・ダイ</div>
+          <div class="leader-name" data-lang-en>Chris Dai</div>
+          <div class="leader-role" data-lang-ja>代表取締役 CEO</div>
+          <div class="leader-role" data-lang-en>CEO &amp; Representative Director</div>
+          <p class="leader-bio" data-lang-ja>
+            Stanford大学卒。Accenture戦略コンサルティング本部を経て、2018年にレシカを創業。日本ブロックチェーン協会アドバイザー。著書に『ネクスト・ブロックチェーン』（日経BP）など。
+          </p>
+          <p class="leader-bio" data-lang-en>
+            Stanford University graduate. Founded RECIKA in 2018 after Accenture Strategy. Advisor to the Japan Blockchain Association. Author of "Next Blockchain" (Nikkei BP) and others.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section class="news" id="news">
+  <div class="wrap">
+    <div class="news-head r">
+      <div class="section-label">News</div>
+      <h2 data-lang-ja><em>お知らせ</em></h2>
+      <h2 data-lang-en><em>News</em></h2>
+    </div>
+    <div class="news-list">
+      <a href="news/1.html" class="news-item r">
+        <span class="news-date">2025.11.14</span>
+        <span class="news-tag">ANGO</span>
+        <span class="news-title" data-lang-ja>河口湖に新拠点「ANGO KAWAGUCHIKO I」をオープン</span>
+        <span class="news-title" data-lang-en>New location "ANGO KAWAGUCHIKO I" opens at Lake Kawaguchi</span>
+      </a>
+      <a href="news/2.html" class="news-item r r-d1">
+        <span class="news-date">2025.07.29</span>
+        <span class="news-tag" data-lang-ja>観光</span>
+        <span class="news-tag" data-lang-en>Tourism</span>
+        <span class="news-title" data-lang-ja>長野県生坂村でリジェネラティブ・ツーリズム「創造の森」第2期始動</span>
+        <span class="news-title" data-lang-en>Regenerative tourism "Forest of Creation" Phase 2 launches in Ikusaka Village</span>
+      </a>
+      <a href="news/3.html" class="news-item r r-d2">
+        <span class="news-date">2025.07.10</span>
+        <span class="news-tag">AI</span>
+        <span class="news-title" data-lang-ja>生成AI監修支援「IP Supervisory Supporter」がJLOX+に採択、本格開発開始</span>
+        <span class="news-title" data-lang-en>"IP Supervisory Supporter" AI design review tool accepted into JLOX+</span>
+      </a>
+      <a href="news/4.html" class="news-item r r-d3">
+        <span class="news-date">2025.02.17</span>
+        <span class="news-tag">UniCask</span>
+        <span class="news-title" data-lang-ja>管理資産76億円規模に到達。羽生蒸溜所の復活を支援</span>
+        <span class="news-title" data-lang-en>Assets under management reach ¥7.6B. Supporting the revival of Hanyu Distillery</span>
+      </a>
+    </div>
+    <a href="news/index.html" class="news-more r r-d4" data-lang-ja>ニュースをもっと見る &rarr;</a>
+    <a href="news/index.html" class="news-more r r-d4" data-lang-en>View all news &rarr;</a>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- COMPANY -->
+<section class="company" id="company">
+  <div class="wrap">
+    <div class="company-head r">
+      <div class="section-label">Company</div>
+      <h2 data-lang-ja><em>会社</em>概要</h2>
+      <h2 data-lang-en>Company <em>Overview</em></h2>
+    </div>
+    <div class="company-table" data-lang-ja>
+      <div class="company-row r">
+        <span class="company-label">社名</span>
+        <span class="company-value">株式会社レシカ</span>
+      </div>
+      <div class="company-row r r-d1">
+        <span class="company-label">設立</span>
+        <span class="company-value">2018年12月</span>
+      </div>
+      <div class="company-row r r-d1">
+        <span class="company-label">資本金</span>
+        <span class="company-value">3,000万円</span>
+      </div>
+      <div class="company-row r r-d2">
+        <span class="company-label">会長</span>
+        <span class="company-value">谷家 衛</span>
+      </div>
+      <div class="company-row r r-d2">
+        <span class="company-label">代表取締役</span>
+        <span class="company-value">クリス・ダイ</span>
+      </div>
+      <div class="company-row r r-d3">
+        <span class="company-label">所在地</span>
+        <span class="company-value">〒100-0004<br>東京都千代田区大手町1-6-1 大手町ビル6F Inspired.Lab</span>
+      </div>
+      <div class="company-row r r-d3">
+        <span class="company-label">事業内容</span>
+        <span class="company-value">ブロックチェーン・AI技術を活用した事業インキュベーション、RWAプラットフォーム開発・運営、技術コンサルティング</span>
+      </div>
+      <div class="company-row r r-d4">
+        <span class="company-label">主要取引先</span>
+        <span class="company-value">電通、トヨタ自動車、千葉大学、京都大学 他</span>
+      </div>
+      <div class="company-row r r-d4">
+        <span class="company-label">グループ会社</span>
+        <span class="company-value">株式会社UniCask、ANGO合同会社</span>
+      </div>
+    </div>
+    <div class="company-table" data-lang-en>
+      <div class="company-row r">
+        <span class="company-label">Company</span>
+        <span class="company-value">RECIKA Co., Ltd.</span>
+      </div>
+      <div class="company-row r r-d1">
+        <span class="company-label">Founded</span>
+        <span class="company-value">December 2018</span>
+      </div>
+      <div class="company-row r r-d1">
+        <span class="company-label">Capital</span>
+        <span class="company-value">¥30 million</span>
+      </div>
+      <div class="company-row r r-d2">
+        <span class="company-label">Chairman</span>
+        <span class="company-value">Mamoru Taniya</span>
+      </div>
+      <div class="company-row r r-d2">
+        <span class="company-label">CEO</span>
+        <span class="company-value">Chris Dai</span>
+      </div>
+      <div class="company-row r r-d3">
+        <span class="company-label">Address</span>
+        <span class="company-value">Inspired.Lab 6F, Otemachi Building,<br>1-6-1 Otemachi, Chiyoda-ku, Tokyo 100-0004</span>
+      </div>
+      <div class="company-row r r-d3">
+        <span class="company-label">Business</span>
+        <span class="company-value">Business incubation with blockchain &amp; AI, RWA platform development &amp; operations, technology consulting</span>
+      </div>
+      <div class="company-row r r-d4">
+        <span class="company-label">Key Clients</span>
+        <span class="company-value">Dentsu, Toyota Motor, Chiba University, Kyoto University, and others</span>
+      </div>
+      <div class="company-row r r-d4">
+        <span class="company-label">Group</span>
+        <span class="company-value">UniCask Inc., ANGO LLC</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <h2 class="r" data-lang-ja><em>お問い合わせ</em></h2>
+  <h2 class="r" data-lang-en><em>Contact Us</em></h2>
+  <p class="r r-d1" data-lang-ja>事業提携・共同投資・取材など、お気軽にご連絡ください。</p>
+  <p class="r r-d1" data-lang-en>Business partnerships, co-investment, press inquiries—get in touch.</p>
+  <a href="mailto:info@recika.jp" class="cta-btn r r-d2" data-lang-ja>メールで問い合わせる</a>
+  <a href="mailto:info@recika.jp" class="cta-btn r r-d2" data-lang-en>Send us an email</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">RECIKA</div>
+  <div class="footer-info">
+    株式会社レシカ / RECIKA Co., Ltd.<br>
+    〒100-0004 東京都千代田区大手町1-6-1 大手町ビル6F Inspired.Lab
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script>
+/* ── Scroll Reveal ── */
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('v'); });
+}, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.r').forEach(el => obs.observe(el));
+
+/* ── Nav: scroll style + progress bar ── */
+const navEl = document.getElementById('nav');
+const progressEl = document.getElementById('navProgress');
+window.addEventListener('scroll', () => {
+  navEl.classList.toggle('scrolled', window.scrollY > 60);
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  if (h > 0 && progressEl) progressEl.style.width = (window.scrollY / h * 100) + '%';
+});
+
+/* ── Smooth anchor scroll ── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    e.preventDefault();
+    const t = document.querySelector(this.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+/* ── Language toggle ── */
+function setLang(lang) {
+  document.documentElement.lang = lang;
+  document.querySelectorAll('.lang-toggle button').forEach(b => {
+    b.classList.toggle('active', b.textContent === lang.toUpperCase());
+  });
+  document.querySelectorAll('.hero-line-1,.hero-line-2,.hero-line-3,.hero-line-4').forEach(s => { s.style.opacity = '1'; });
+  document.querySelectorAll('.r').forEach(el => obs.observe(el));
+}
+
+/* ── Hero Text Scramble ── */
+(function() {
+  var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef0123456789アイウエオカキクケコサシスセソタチツテト@#$%&<>{}[]';
+  var SKIP = ' 　、。「」（）.,-—…';
+  function scramble(span, delay) {
+    var html = span.innerHTML;
+    var text = span.textContent;
+    var len = text.length;
+    if (!len) return;
+    var total = Math.max(900, len * 55);
+    var perChar = total / len;
+    var hold = 350;
+    setTimeout(function() {
+      span.style.opacity = '1';
+      var t0 = performance.now();
+      (function tick(now) {
+        var dt = now - t0;
+        var s = '', done = true;
+        for (var i = 0; i < len; i++) {
+          if (SKIP.indexOf(text[i]) >= 0) { s += text[i]; continue; }
+          if (dt >= i * perChar + hold) {
+            s += text[i];
+          } else {
+            s += CHARS[(Math.random() * CHARS.length) | 0];
+            done = false;
+          }
+        }
+        span.textContent = s;
+        if (done) { span.innerHTML = html; } else { requestAnimationFrame(tick); }
+      })(performance.now());
+    }, delay);
+  }
+  var h1 = document.querySelector('h1[data-lang-ja]');
+  if (h1) {
+    [1,2,3,4].forEach(function(n, i) {
+      var sp = h1.querySelector('.hero-line-' + n);
+      if (sp) scramble(sp, 300 + i * 400);
+    });
+  }
+})();
+
+/* ── Cursor Glow ── */
+(function() {
+  const glow = document.getElementById('cursorGlow');
+  if (!glow || window.innerWidth < 769) return;
+  let gx = -500, gy = -500, tx = -500, ty = -500;
+  document.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; });
+  (function tick() {
+    gx += (tx - gx) * 0.08;
+    gy += (ty - gy) * 0.08;
+    glow.style.transform = 'translate(' + (gx - 250) + 'px,' + (gy - 250) + 'px)';
+    requestAnimationFrame(tick);
+  })();
+})();
+
+/* ── Card Magnetic Tilt ── */
+document.querySelectorAll('.pcard').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const r = card.getBoundingClientRect();
+    const cx = r.width / 2, cy = r.height / 2;
+    const x = e.clientX - r.left, y = e.clientY - r.top;
+    const rx = (y - cy) / cy * -6;
+    const ry = (x - cx) / cx * 6;
+    card.style.transform = 'perspective(800px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateY(-4px)';
+  });
+  card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+});
+
+/* ── Interactive Canvas Particles (Hero) ── */
+(function() {
+  if (window.innerWidth < 769) return;
+  const canvas = document.getElementById('heroCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const heroEl = document.querySelector('.hero');
+  let w, h, particles = [];
+  let mouse = { x: null, y: null };
+  const N = 110;
+  const LINK = 160;
+  const MOUSE_R = 260;
+  const ACCENT = [176, 120, 50];
+
+  function resize() {
+    const box = canvas.parentElement.getBoundingClientRect();
+    w = box.width; h = box.height;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  class P {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * w;
+      this.y = Math.random() * h;
+      this.vx = (Math.random() - 0.5) * 0.35;
+      this.vy = (Math.random() - 0.5) * 0.35;
+      this.r = Math.random() * 2.8 + 1.0;
+      this.a = Math.random() * 0.35 + 0.3;
+    }
+    update() {
+      if (mouse.x !== null) {
+        const dx = mouse.x - this.x, dy = mouse.y - this.y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < MOUSE_R && d > 0) {
+          const f = (1 - d / MOUSE_R) * 0.035;
+          this.vx += (dx / d) * f;
+          this.vy += (dy / d) * f;
+        }
+      }
+      this.vx *= 0.994; this.vy *= 0.994;
+      this.x += this.vx; this.y += this.vy;
+      if (this.x < -20) this.x = w + 20;
+      if (this.x > w + 20) this.x = -20;
+      if (this.y < -20) this.y = h + 20;
+      if (this.y > h + 20) this.y = -20;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, 6.283);
+      ctx.fillStyle = 'rgba(' + ACCENT + ',' + this.a + ')';
+      ctx.fill();
+    }
+  }
+
+  function init() {
+    resize();
+    particles = [];
+    for (let i = 0; i < N; i++) particles.push(new P());
+  }
+
+  function frame() {
+    ctx.clearRect(0, 0, w, h);
+    for (let i = 0; i < N; i++) {
+      const a = particles[i];
+      a.update();
+      a.draw();
+      for (let j = i + 1; j < N; j++) {
+        const b = particles[j];
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const d = dx * dx + dy * dy;
+        if (d < LINK * LINK) {
+          const o = 0.22 * (1 - Math.sqrt(d) / LINK);
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = 'rgba(' + ACCENT + ',' + o + ')';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+    }
+    if (mouse.x !== null) {
+      for (let i = 0; i < N; i++) {
+        const p = particles[i];
+        const dx = mouse.x - p.x, dy = mouse.y - p.y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < MOUSE_R) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.strokeStyle = 'rgba(' + ACCENT + ',' + (0.3 * (1 - d / MOUSE_R)) + ')';
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+      ctx.beginPath();
+      ctx.arc(mouse.x, mouse.y, 4, 0, 6.283);
+      ctx.fillStyle = 'rgba(' + ACCENT + ',0.5)';
+      ctx.fill();
+    }
+    requestAnimationFrame(frame);
+  }
+
+  heroEl.addEventListener('mousemove', (e) => {
+    const r = canvas.parentElement.getBoundingClientRect();
+    mouse.x = e.clientX - r.left;
+    mouse.y = e.clientY - r.top;
+  });
+  heroEl.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+  heroEl.addEventListener('click', (e) => {
+    const r = canvas.parentElement.getBoundingClientRect();
+    const cx = e.clientX - r.left;
+    const cy = e.clientY - r.top;
+    particles.forEach(p => {
+      const dx = p.x - cx, dy = p.y - cy;
+      const d = Math.sqrt(dx * dx + dy * dy);
+      if (d < 300 && d > 0) {
+        const force = (1 - d / 300) * 5;
+        p.vx += (dx / d) * force;
+        p.vy += (dy / d) * force;
+      }
+    });
+  });
+  window.addEventListener('resize', () => {
+    resize();
+    particles.forEach(p => { if (p.x > w || p.y > h) p.reset(); });
+  });
+
+  init();
+  frame();
+})();
+</script>
+
+</body>
+</html>
